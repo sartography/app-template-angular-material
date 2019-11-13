@@ -26,4 +26,15 @@ describe('ApiService', () => {
     const service: ApiService = TestBed.get(ApiService);
     expect(service).toBeTruthy();
   });
+
+  it('should rewrite dummy API URL to access static JSON assets directory', () => {
+    const service: ApiService = TestBed.get(ApiService);
+    const result: string = (service as any)._dummy_api_url('https://staging.whatever.com:5000/api/whatever');
+    expect(result).toEqual('/assets/json/whatever.json');
+  });
+
+  it('should rewrite dummy API URL to access static JSON assets directory', () => {
+    const service: ApiService = TestBed.get(ApiService);
+
+  });
 });
