@@ -111,7 +111,12 @@ export class ApiService {
   }
 
   private _dummy_api_url(path: string) {
-    return path.replace(/^(.*)\/api\/(.*)$/, '/assets/json/$2.json');
+    if (path.search('/api/') !== -1) {
+      const arr = path.split('/api/');
+      if (arr.length > 0) {
+        return `/assets/json/${arr[arr.length - 1]}.json`;
+      }
+    }
   }
 
   private _getOne<T extends GenericType>(id: number, endpointName: string): Observable<T> {
