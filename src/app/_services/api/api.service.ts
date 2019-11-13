@@ -1,7 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable, throwError} from 'rxjs';
-import {catchError, filter, find, map} from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {GenericType} from '../../_models/generic-type';
 import {Study} from '../../_models/study';
@@ -133,8 +133,9 @@ export class ApiService {
   }
 
   private _getAll<T extends GenericType>(endpointName: string): Observable<T[]> {
+    const url = this._endpointUrl(endpointName + 'List');
     return this.httpClient
-      .get<T[]>(this._endpointUrl(endpointName + 'List'))
+      .get<T[]>(url)
       .pipe(catchError(this._handleError));
   }
 }
