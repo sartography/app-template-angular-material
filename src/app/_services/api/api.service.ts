@@ -92,10 +92,7 @@ export class ApiService {
   }
 
   private _handleError(error: ApiError) {
-    let message = 'Could not complete your request; please try again later.';
-    message = error.message;
-    // return an observable with a user-facing error message
-    return throwError(message);
+    return throwError(error.message || 'Could not complete your request; please try again later.');
   }
 
   private _endpointUrl(endpointName: string): string {
